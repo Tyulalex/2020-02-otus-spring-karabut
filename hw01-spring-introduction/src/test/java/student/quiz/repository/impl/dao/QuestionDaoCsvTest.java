@@ -71,9 +71,4 @@ class QuestionDaoCsvTest extends BaseQuizTest {
         }
 
     }
-
-
-    @Test
-    void getQuestions() {
-    }
 }

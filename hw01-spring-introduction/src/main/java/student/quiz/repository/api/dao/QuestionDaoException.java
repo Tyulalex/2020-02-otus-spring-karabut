@@ -1,6 +1,8 @@
 package student.quiz.repository.api.dao;
 
-public class QuestionDaoException extends RuntimeException {
+import student.quiz.exceptions.QuizBaseException;
+
+public class QuestionDaoException extends QuizBaseException {
 
     public QuestionDaoException(Exception ex) {
         super(ex);

@@ -1,6 +1,8 @@
 package student.quiz.repository.api.dataextractor;
 
-public class CSVReaderException extends RuntimeException {
+import student.quiz.exceptions.QuizBaseException;
+
+public class CSVReaderException extends QuizBaseException {
 
     public CSVReaderException(Exception ex) {
         super(ex);

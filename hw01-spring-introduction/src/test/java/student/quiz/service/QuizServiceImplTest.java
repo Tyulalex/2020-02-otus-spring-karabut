@@ -16,7 +16,6 @@ import student.quiz.repository.api.dao.AnswerDaoException;
 import student.quiz.repository.api.dao.QuestionDao;
 import student.quiz.repository.api.dao.QuestionDaoException;
 import student.quiz.repository.api.model.Answer;
-import student.quiz.repository.api.model.Question;
 
 import java.util.HashMap;
 import java.util.List;
