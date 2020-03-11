@@ -34,7 +34,7 @@
         </plugins>
         <testResources>
             <testResource>
-                <directory>${basedir}/src/test/java/resources</directory>
+                <directory>${project.basedir}/src/test/resources</directory>
             </testResource>
         </testResources>
     </build>

@@ -5,7 +5,6 @@ import student.quiz.domain.QuizResult;
 import student.quiz.domain.QuizStatus;
 import student.quiz.repository.api.model.Answer;
 import student.quiz.repository.api.model.Question;
-import student.quiz.service.QuizService;
 
 import java.util.Map;
 
@@ -16,8 +15,6 @@ public class GUIPrinterImpl implements GUIPrinter {
     private static final String NUMBER_OF_CORRECT_STRING = "Number of correct answers %d";
     private static final String RESULT_OF_QUIZ = "This is %s result";
     private static final String ANSWER_VARIANT = "%s. %s";
-
-    private final QuizService quizService;
 
     @Override
     public void printGreetings() {

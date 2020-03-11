@@ -33,7 +33,6 @@
         <constructor-arg name="questionDao" ref="questionDaoCsv"/>
     </bean>
     <bean id="guiPrinter" class="student.quiz.console.GUIPrinterImpl">
-        <constructor-arg name="quizService" ref="quizService"/>
     </bean>
     <bean id="guiConsole" class="student.quiz.console.GUIConsoleImpl">
         <constructor-arg name="guiPrinter" ref="guiPrinter"/>
