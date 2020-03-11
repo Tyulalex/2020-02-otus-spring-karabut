@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="csvFileProperties" class="student.quiz.repository.impl.dataextractor.CSVFileProperties">
+        <constructor-arg name="delimiter" value="|"/>
+        <constructor-arg name="questionResource" value="classpath:geography.quiz/questions.csv"/>
+        <constructor-arg name="answerResource" value="classpath:geography.quiz/answers.csv"/>
+    </bean>
+
+    <bean id="csvMapper" class="com.fasterxml.jackson.dataformat.csv.CsvMapper">
+    </bean>
+
+    <bean id="csvReader" class="student.quiz.repository.impl.dataextractor.CSVReaderImpl">
+        <constructor-arg name="csvMapper" ref="csvMapper"/>
+    </bean>
+
+    <bean id="questionDaoCsv" class="student.quiz.repository.impl.dao.QuestionDaoCsv">
+        <constructor-arg name="fileProperties" ref="csvFileProperties"/>
+        <constructor-arg name="csvReader" ref="csvReader"/>
+    </bean>
+
+    <bean id="answerDao" class="student.quiz.repository.impl.dao.AnswerDaoCsv">
+        <constructor-arg name="fileProperties" ref="csvFileProperties"/>
+        <constructor-arg name="csvReader" ref="csvReader"/>
+    </bean>
+    <bean id="quizService" class="student.quiz.service.QuizServiceImpl">
+        <constructor-arg name="answerDao" ref="answerDao"/>
+        <constructor-arg name="questionDao" ref="questionDaoCsv"/>
+    </bean>
+    <bean id="guiPrinter" class="student.quiz.console.GUIPrinterImpl">
+        <constructor-arg name="quizService" ref="quizService"/>
+    </bean>
+    <bean id="guiConsole" class="student.quiz.console.GUIConsoleImpl">
+        <constructor-arg name="guiPrinter" ref="guiPrinter"/>
+        <constructor-arg name="quizService" ref="quizService"/>
+    </bean>
+
+</beans>

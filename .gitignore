@@ -21,3 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/hw01-spring-introduction/hw01-spring-introduction.iml
+/hw01-spring-introduction/target/
+/.idea/
