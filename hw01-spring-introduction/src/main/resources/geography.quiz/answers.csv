@@ -1,0 +1,25 @@
+Number| Answer| QuestionNumber| IsCorrect
+1| Oceania| 1| true
+2| Asia|  1| false
+3| Africa|  1| false
+4| Europe|  1| false
+
+5| Virgin Islands| 2| false
+6| Christmas Islands| 2| true
+7| Guernsey| 2| false
+8| Norfolk Island| 2| false
+
+9| Europe| 3| true
+10| Africa| 3| false
+11| Asia| 3| false
+12| South America| 3| false
+
+13| Apennine Mountains| 4| false
+14| Vosges| 4| false
+15| Carpathian Mountains| 4| true
+16| Ural Mountains| 4| false
+
+17| Syria| 5| true
+18| Afghanistan | 5| false
+19| Peru| 5| false
+20| Switzerland| 5| false
