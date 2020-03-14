@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Examinee {
 
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     private QuizResult quizResult;
 
     public Examinee(String lastName, String firstName) {
