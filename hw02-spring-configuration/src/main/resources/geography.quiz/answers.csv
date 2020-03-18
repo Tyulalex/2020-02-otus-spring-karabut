@@ -1,0 +1,26 @@
+Number|Answer| QuestionNumber| IsCorrect
+1|answers.oceania| 1| true
+2|answers.asia|  1| false
+3|answers.africa|  1| false
+4|answers.europe|  1| false
+
+5|answers.virgin_islands| 2| false
+6|answers.christmas_islands| 2| true
+7|answers.guernsey| 2| false
+8|answers.norfolk_island| 2| false
+
+9|answers.europe| 3| true
+10|answers.africa| 3| false
+11|answers.asia| 3| false
+12|answers.south_america| 3| false
+
+13|answers.apennine_mountains| 4| false
+14|answers.vosges| 4| false
+15|answers.carpathian_mountains| 4| true
+16|answers.ural_mountains| 4| false
+
+17|answers.syria| 5| true
+18|answers.afghanistan| 5| false
+19|answers.peru| 5| false
+20|answers.switzerland| 5| false
+
