@@ -1,0 +1,17 @@
+csv:
+  files:
+    en_EN:
+      questions_csv: "geography.quiz/questions_en_EN.csv"
+      answers_csv: "geography.quiz/answers_en_EN.csv"
+    ru_RU:
+      questions_csv: "geography.quiz/questions_ru_RU.csv"
+      answers_csv: "geography.quiz/answers_ru_RU.csv"
+    default:
+      questions_csv: "geography.quiz/questions_en_EN.csv"
+      answers_csv: "geography.quiz/answers_en_EN.csv"
+  delimiter: '|'
+  locale: en_EN
+spring:
+  messages:
+    basename: "i18n.messages"
+    encoding: "UTF-8"

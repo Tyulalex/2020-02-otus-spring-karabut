@@ -11,6 +11,7 @@
     <modules>
         <module>hw01-spring-introduction</module>
         <module>hw02-spring-configuration</module>
+        <module>hw03-spring-boot-migration</module>
     </modules>
 
     <properties>
