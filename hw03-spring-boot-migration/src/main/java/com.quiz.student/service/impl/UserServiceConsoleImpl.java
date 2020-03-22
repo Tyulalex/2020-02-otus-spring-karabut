@@ -18,7 +18,7 @@ public class UserServiceConsoleImpl implements UserService {
     @Qualifier("ConsoleLocalizedIOService")
     private final IOService ioService;
 
-    public UserServiceConsoleImpl(@Qualifier("ConsoleLocalizedIOService") IOService ioService){
+    public UserServiceConsoleImpl(@Qualifier("ConsoleLocalizedIOService") IOService ioService) {
         this.ioService = ioService;
     }
 

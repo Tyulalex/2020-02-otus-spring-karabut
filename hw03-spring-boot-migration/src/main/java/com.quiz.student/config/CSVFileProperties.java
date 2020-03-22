@@ -24,21 +24,21 @@ public class CSVFileProperties {
 
     public Resource getQuestionResource() {
         Resource questionResource = files.get(locale.toString()).get("questions_csv");
-        if (questionResource == null){
+        if (questionResource == null) {
             questionResource = getDefault("questions_csv");
         }
         return questionResource;
     }
 
-    public Resource getAnswerResource(){
+    public Resource getAnswerResource() {
         Resource answerResource = files.get(locale.toString()).get("answers_csv");
-        if (answerResource == null){
+        if (answerResource == null) {
             answerResource = getDefault("answers_csv");
         }
         return answerResource;
     }
 
-    public Resource getDefault(String fileName){
+    public Resource getDefault(String fileName) {
         return files.get("default").get(fileName);
     }
 }
