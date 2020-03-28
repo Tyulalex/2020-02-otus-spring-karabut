@@ -10,8 +10,15 @@ csv:
       questions_csv: "geography.quiz/questions_en_EN.csv"
       answers_csv: "geography.quiz/answers_en_EN.csv"
   delimiter: '|'
-  locale: en_EN
+  locale: ru_RU
 spring:
   messages:
     basename: "i18n.messages"
     encoding: "UTF-8"
+logging:
+  level:
+    root: ERROR
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+  file:
+    name: application-debug.log

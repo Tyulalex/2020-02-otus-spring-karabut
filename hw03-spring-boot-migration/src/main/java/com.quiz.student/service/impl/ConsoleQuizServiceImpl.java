@@ -66,14 +66,18 @@ public class ConsoleQuizServiceImpl implements ConsoleQuizService {
 
     private String getAnswerId() {
         int answerId = -1;
-        while (answerId <= 0) {
+        while (isInvalidAnswer(answerId)) {
             this.ioServiceLocalized.out(YOUR_ANSWER_STRING);
             answerId = parseAnswerId(this.ioServiceLocalized.in());
-            if (answerId <= 0) {
+            if (isInvalidAnswer(answerId)) {
                 this.ioServiceLocalized.out(WRONG_ANSWER_INPUT);
             }
         }
         return String.valueOf(answerId);
+    }
+
+    private boolean isInvalidAnswer(int answerId) {
+        return (answerId <= 0 || answerId > 4);
     }
 
     private int parseAnswerId(String answerId) {
