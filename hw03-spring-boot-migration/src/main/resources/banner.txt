@@ -1,0 +1,11 @@
+${AnsiBackground.BLUE}                    ___                       ___           ___           ___
+${AnsiBackground.BLUE}                   /\  \                     /\__\         /\__\         /\__\
+${AnsiBackground.BLUE}      ___          \:\  \       ___         /::|  |       /::|  |       /::|  |
+${AnsiBackground.BLUE}     /\  \          \:\  \     /\__\       /:/:|  |      /:/:|  |      /:/:|  |
+${AnsiBackground.BLUE}    /::\  \     ___  \:\  \   /:/__/      /:/|:|  |__   /:/|:|  |__   /:/|:|  |__
+${AnsiBackground.BLUE}   /:/\:\  \   /\  \  \:\__\ /::\  \     /:/ |:| /\__\ /:/ |:| /\__\ /:/ |:| /\__\
+${AnsiBackground.BLUE}  /:/ /::\  \  \:\  \ /:/  / \/\:\  \__  \/__|:|/:/  / \/__|:|/:/  / \/__|:|/:/  /
+${AnsiBackground.BLUE} /:/_/:/\:\__\  \:\  /:/  /   ~~\:\/\__\     |:/:/  /      |:/:/  /      |:/:/  /
+${AnsiBackground.BLUE} \:\/:/  \/__/   \:\/:/  /       \::/  /     |::/  /       |::/  /       |::/  /
+${AnsiBackground.BLUE}  \::/  /         \::/  /        /:/  /      |:/  /        |:/  /        |:/  /
+${AnsiBackground.BLUE}   \/__/           \/__/         \/__/       |/__/         |/__/         |/__/
