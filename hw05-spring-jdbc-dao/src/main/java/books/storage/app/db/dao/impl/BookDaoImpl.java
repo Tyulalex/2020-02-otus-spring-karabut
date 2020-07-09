@@ -28,7 +28,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getBooks() {
         try {
-            return jdbcOperations.query("select * from books", new BookMapper());
+            return jdbcOperations.query("select id, title from books", new BookMapper());
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new BookDaoException(ex);
@@ -74,7 +74,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> findBooksByTitle(String title) {
         try {
-            return jdbcOperations.query("select * from books where title like :title",
+            return jdbcOperations.query("select id, title from books where title like :title",
                     Map.of("title", "%" + title + "%"), new BookMapper());
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -85,7 +85,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public Book findBookById(long id) {
         try {
-            return jdbcOperations.queryForObject("select * from books where id = :id",
+            return jdbcOperations.queryForObject("select id, title from books where id = :id",
                     Map.of("id", id), new BookMapper());
         } catch (IncorrectResultSizeDataAccessException ex) {
             if (ex.getActualSize() == 0) {

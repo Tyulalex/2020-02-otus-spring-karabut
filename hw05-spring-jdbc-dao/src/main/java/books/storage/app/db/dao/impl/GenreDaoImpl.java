@@ -43,7 +43,7 @@ public class GenreDaoImpl implements GenreDao {
     @Override
     public List<Genre> findGenresByName(String genreName) {
         try {
-            return jdbcOperations.query("select * from genres where genre_name=:genre_name",
+            return jdbcOperations.query("select id, genre_name from genres where genre_name=:genre_name",
                     Map.of("genre_name", genreName),
                     new GenreMapper());
         } catch (Exception ex) {
@@ -69,7 +69,7 @@ public class GenreDaoImpl implements GenreDao {
     @Override
     public List<Genre> getGenres() {
         try {
-            return jdbcOperations.query("select * from genres", new GenreMapper());
+            return jdbcOperations.query("select id, genre_name from genres", new GenreMapper());
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new GenreDaoException(ex);

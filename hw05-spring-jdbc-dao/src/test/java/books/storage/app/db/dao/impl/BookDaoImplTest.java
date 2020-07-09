@@ -109,7 +109,7 @@ class BookDaoImplTest {
     void updateBookById() {
         bookDao.updateBookById(1, "new title");
         Book book = jdbcOperations.queryForObject(
-                "select * from books where id=:id",
+                "select id, title from books where id=:id",
                 Map.of("id", 1),
                 new BookDaoImpl.BookMapper()
         );

@@ -1,6 +1,8 @@
 package books.storage.app.db.dao;
 
-public class BookDaoException extends RuntimeException {
+import books.storage.app.services.BookStorageBaseException;
+
+public class BookDaoException extends BookStorageBaseException {
 
     public BookDaoException(Exception ex) {
         super(ex);

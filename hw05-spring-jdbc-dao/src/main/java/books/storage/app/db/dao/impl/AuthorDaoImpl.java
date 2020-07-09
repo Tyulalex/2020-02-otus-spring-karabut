@@ -24,7 +24,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public List<Author> getAuthors() {
         try {
-            return jdbcOperations.query("select * from authors", new AuthorMapper());
+            return jdbcOperations.query("select id, author_name from authors", new AuthorMapper());
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new AuthorDaoException(ex);
@@ -53,7 +53,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public List<Author> findAuthorsByName(String authorName) {
         try {
-            return jdbcOperations.query("select * from authors where author_name=:author_name",
+            return jdbcOperations.query("select id, author_name from authors where author_name=:author_name",
                     Map.of("author_name", authorName),
                     new AuthorMapper());
         } catch (Exception ex) {
