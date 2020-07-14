@@ -16,4 +16,6 @@ public interface CommentRepositoryJpa {
     Optional<Comment> findById(long id);
 
     void updateById(long id, String comment);
+
+    void deleteAllByBookId(long bookId);
 }

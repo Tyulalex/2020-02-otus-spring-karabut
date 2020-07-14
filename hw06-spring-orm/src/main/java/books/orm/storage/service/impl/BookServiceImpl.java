@@ -76,6 +76,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void deleteBookById(long id) {
         try {
+            commentRepositoryJpa.deleteAllByBookId(id);
             bookRepositoryJpa.deleteById(id);
         } catch (Exception ex) {
             log.error(ex.getMessage());
