@@ -99,27 +99,26 @@ class ShellBooksCommandsTest {
     @Test
     void findCommentByBookId() {
         Object result = shell.evaluate(() -> "find-comments-for-book --bookId 1");
-        assertThat(result).isEqualTo("Author: Jack Black wrote a comment: 1. good book\n" +
-                "Author: Jack White wrote a comment: 2. bad book");
+        assertThat(result).isEqualTo("comment: 1. good book\ncomment: 2. bad book");
     }
 
     @Test
     void findCommentById() {
         Object result = shell.evaluate(() -> "find-comment-by-id --id 1");
-        assertThat(result).isEqualTo("Author: Jack Black wrote a comment: 1. good book");
+        assertThat(result).isEqualTo("comment: 1. good book");
     }
 
     @Test
     void addCommentToBook() {
-        shell.evaluate(() -> "add-comment-to-book --bookId 1 --comment newcomment --author newauthor");
+        shell.evaluate(() -> "add-comment-to-book --bookId 1 --comment newcomment");
         Object result = shell.evaluate(() -> "find-comment-by-id --id 3");
-        assertThat(result).isEqualTo("Author: newauthor wrote a comment: 3. newcomment");
+        assertThat(result).isEqualTo("comment: 3. newcomment");
     }
 
     @Test
     void deleteComment() {
         Object resultBeforeDelete = shell.evaluate(() -> "find-comment-by-id --id 1");
-        assertThat(resultBeforeDelete).isEqualTo("Author: Jack Black wrote a comment: 1. good book");
+        assertThat(resultBeforeDelete).isEqualTo("comment: 1. good book");
         shell.evaluate(() -> "delete-comment --id 1");
         Object resultAfterDelete = shell.evaluate(() -> "find-comment-by-id --id 1");
         assertThat(resultAfterDelete).isEqualTo("No such comment with id=1");
@@ -128,9 +127,24 @@ class ShellBooksCommandsTest {
     @Test
     void updateComment() {
         Object resultBeforeDelete = shell.evaluate(() -> "find-comment-by-id --id 1");
-        assertThat(resultBeforeDelete).isEqualTo("Author: Jack Black wrote a comment: 1. good book");
+        assertThat(resultBeforeDelete).isEqualTo("comment: 1. good book");
         shell.evaluate(() -> "update-comment-to-book --id 1 --comment newComment");
         Object resultAfterDelete = shell.evaluate(() -> "find-comment-by-id --id 1");
-        assertThat(resultAfterDelete).isEqualTo("Author: Jack Black wrote a comment: 1. newComment");
+        assertThat(resultAfterDelete).isEqualTo("comment: 1. newComment");
+    }
+
+    @Test
+    void deleteABookWithComments() {
+        shell.evaluate(() -> "add-comment-to-book --bookId 1 --comment newcomment");
+        Object result1 = shell.evaluate(() -> "find-comment-by-id --id 3");
+        assertThat(result1).isEqualTo("comment: 3. newcomment");
+
+        shell.evaluate(() -> "delete-book-by-id --id 1");
+
+        Object result2 = shell.evaluate(() -> "find-book-by-id --id 1");
+        assertThat(result2).isEqualTo("No such book with id=1");
+
+        Object result3 = shell.evaluate(() -> "find-comment-by-id --id 3");
+        assertThat(result3).isEqualTo("No such comment with id=3");
     }
 }

@@ -20,7 +20,6 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepositoryJpa authorRepositoryJpa;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Author> getAuthors() {
         try {
             return authorRepositoryJpa.findAll();

@@ -13,9 +13,8 @@ public interface BookRepositoryJpa {
 
     Book save(Book book);
 
-    void deleteById(long id);
-
-    void updateTitleById(long id, String title);
+    void delete(Book book);
 
     List<Book> findBooksByTitle(String title);
+
 }

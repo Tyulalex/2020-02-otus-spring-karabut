@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -39,18 +38,8 @@ public class BookRepositoryJpaImpl implements BookRepositoryJpa {
     }
 
     @Override
-    public void deleteById(long id) {
-        Query query = em.createQuery("delete from Book b where b.id=:id");
-        query.setParameter("id", id);
-        query.executeUpdate();
-    }
-
-    @Override
-    public void updateTitleById(long id, String title) {
-        Query query = em.createQuery("update Book b set b.title=:title where b.id=:id");
-        query.setParameter("title", title);
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public void delete(Book book) {
+        em.remove(book);
     }
 
     @Override

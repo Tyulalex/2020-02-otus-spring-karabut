@@ -76,8 +76,11 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void deleteBookById(long id) {
         try {
-            commentRepositoryJpa.deleteAllByBookId(id);
-            bookRepositoryJpa.deleteById(id);
+            val book = bookRepositoryJpa.findById(id);
+            if (book.isPresent()) {
+                commentRepositoryJpa.deleteAllByBookId(id);
+                bookRepositoryJpa.delete(book.get());
+            }
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new BookServiceException(ex);
@@ -88,13 +91,12 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void updateBookById(long id, String title) {
         try {
-            bookRepositoryJpa.updateTitleById(id, title);
+            val book = bookRepositoryJpa.findById(id);
+            book.ifPresent(b -> b.setTitle(title));
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new BookServiceException(ex);
         }
-
-
     }
 
     @Override
@@ -116,5 +118,4 @@ public class BookServiceImpl implements BookService {
             throw new BookServiceException(ex);
         }
     }
-
 }

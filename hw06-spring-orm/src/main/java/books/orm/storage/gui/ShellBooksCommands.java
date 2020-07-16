@@ -44,7 +44,7 @@ public class ShellBooksCommands {
         bookService.saveBook(book);
     }
 
-    @ShellMethod(key = {"find-books-by-title"}, value = "Find books by title, params --title ")
+    @ShellMethod(key = {"find-books-by-title"}, value = "Find books by title, params --title")
     public String findBooksByTitle(@ShellOption("--title") String title) {
         return bookService.findBooksByTitle(title);
     }
@@ -99,15 +99,13 @@ public class ShellBooksCommands {
     }
 
     @ShellMethod(key = {"add-comment-to-book"}, value = "Add new comment for book by book id")
-    public void addCommentToBook(@ShellOption("--bookId") long bookId, @ShellOption("--comment") String comment, @ShellOption("--author") String author) {
-
-        val commentToAdd = new Comment(0, comment, author, bookId);
+    public void addCommentToBook(@ShellOption("--bookId") long bookId, @ShellOption("--comment") String comment) {
+        val commentToAdd = new Comment(0, comment, bookId);
         try {
             bookService.addComment(commentToAdd);
         } catch (BookNotFoundServiceException ex) {
             ioService.out(String.format("No book with id=%d found", bookId));
         }
-
     }
 
     @ShellMethod(key = {"delete-comment"}, value = "Delete comment for book by book id")

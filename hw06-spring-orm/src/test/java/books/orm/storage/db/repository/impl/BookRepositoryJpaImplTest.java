@@ -77,17 +77,10 @@ class BookRepositoryJpaImplTest {
     @Test
     @DisplayName("Book repository shall delete by Id")
     void deleteById() {
-        bookRepositoryJpa.deleteById(2);
+        val book = testEntityManager.find(Book.class, 2L);
+        bookRepositoryJpa.delete(book);
         val deletedBook = testEntityManager.find(Book.class, 2L);
         assertThat(deletedBook).isNull();
-    }
-
-    @Test
-    @DisplayName("Book repository shall update title by Id")
-    void updateTitleById() {
-        bookRepositoryJpa.updateTitleById(2, "new title");
-        val updatedBook = testEntityManager.find(Book.class, 2L);
-        assertThat(updatedBook.getTitle()).isEqualTo("new title");
     }
 
     @Test

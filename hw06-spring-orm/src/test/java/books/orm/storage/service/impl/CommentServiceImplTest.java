@@ -1,6 +1,8 @@
 package books.orm.storage.service.impl;
 
+import books.orm.storage.db.model.Book;
 import books.orm.storage.db.model.Comment;
+import books.orm.storage.db.repository.BookRepositoryJpa;
 import books.orm.storage.db.repository.CommentRepositoryJpa;
 import books.orm.storage.service.BookFormatterService;
 import books.orm.storage.service.CommentService;
@@ -32,9 +34,12 @@ class CommentServiceImplTest {
     @MockBean
     private BookFormatterService bookFormatterService;
 
+    @MockBean
+    private BookRepositoryJpa bookRepositoryJpa;
+
     @Test
     void findCommentById() {
-        val comment = new Comment(1, "comment", "author", 1);
+        val comment = new Comment(1, "comment", 1);
         Mockito.when(commentRepositoryJpa.findById(1)).thenReturn(Optional.of(comment));
         val commentString = commentService.findCommentById(1);
         assertThat(commentString).isEqualTo(comment.toString());
@@ -42,8 +47,9 @@ class CommentServiceImplTest {
 
     @Test
     void findCommentsByBookId() {
-        val comment = new Comment(1, "comment", "author", 1);
-        Mockito.when(commentRepositoryJpa.findAllByBookId(1)).thenReturn(List.of(comment));
+        val comment = new Comment(1, "comment", 1);
+        val book = Optional.of(Book.builder().id(1).title("t").comments(List.of(comment)).build());
+        Mockito.when(bookRepositoryJpa.findById(1)).thenReturn(book);
         Mockito.when(bookFormatterService.commentsToString(List.of(comment))).thenReturn("books comments");
         val comments = commentService.findCommentsByBookId(1);
         assertThat(comments).isEqualTo("books comments");
@@ -51,15 +57,18 @@ class CommentServiceImplTest {
 
     @Test
     void deleteComment() {
-        Mockito.doNothing().when(commentRepositoryJpa).deleteById(1);
+        val comment = new Comment(1, "comment", 1);
+        Mockito.when(commentRepositoryJpa.findById(1)).thenReturn(Optional.of(comment));
+        Mockito.doNothing().when(commentRepositoryJpa).delete(comment);
         commentService.deleteComment(1);
-        Mockito.verify(commentRepositoryJpa, times(1)).deleteById(1);
+        Mockito.verify(commentRepositoryJpa, times(1)).delete(comment);
     }
 
     @Test
     void updateComment() {
-        Mockito.doNothing().when(commentRepositoryJpa).updateById(1, "comment");
+        val comment = new Comment(1, "comment", 1);
+        Mockito.when(commentRepositoryJpa.findById(1L)).thenReturn(Optional.of(comment));
         commentService.updateComment(1, "comment");
-        Mockito.verify(commentRepositoryJpa, times(1)).updateById(1, "comment");
+        Mockito.verify(commentRepositoryJpa, times(1)).findById(1L);
     }
 }

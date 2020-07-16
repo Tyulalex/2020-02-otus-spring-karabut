@@ -22,14 +22,11 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-    @Column(name = "author", nullable = false)
-    private String author;
-
     @Column(name = "book_id", nullable = false)
     private long bookId;
 
     @Override
     public String toString() {
-        return String.format("Author: %s wrote a comment: %d. %s", author, id, comment);
+        return String.format("comment: %d. %s", id, comment);
     }
 }

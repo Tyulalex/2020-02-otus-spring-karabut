@@ -26,15 +26,8 @@ class CommentRepositoryJpaImplTest {
     private TestEntityManager testEntityManager;
 
     @Test
-    void findAllByBookId() {
-        val comments = commentRepositoryJpa.findAllByBookId(1);
-        assertThat(comments.size()).isEqualTo(2);
-        assertThat(comments.get(0)).isEqualTo(new Comment(1, "good book", "Jack Black", 1));
-    }
-
-    @Test
     void save() {
-        val comment = new Comment(0, "new comment", "new author", 1);
+        val comment = new Comment(0, "new comment", 1);
         commentRepositoryJpa.save(comment);
         assertThat(comment.getId()).isEqualTo(3);
         val savedComment = testEntityManager.find(Comment.class, 3L);
@@ -43,7 +36,8 @@ class CommentRepositoryJpaImplTest {
 
     @Test
     void deleteById() {
-        commentRepositoryJpa.deleteById(1);
+        val comment = testEntityManager.find(Comment.class, 1L);
+        commentRepositoryJpa.delete(comment);
         val deletedComment = testEntityManager.find(Comment.class, 1L);
         assertThat(deletedComment).isNull();
     }
@@ -51,14 +45,6 @@ class CommentRepositoryJpaImplTest {
     @Test
     void findById() {
         val comment = commentRepositoryJpa.findById(1L);
-        assertThat(comment).isPresent().isEqualTo(Optional.of(new Comment(1, "good book", "Jack Black", 1)));
-    }
-
-    @Test
-    void updateById() {
-        String updatedComment = "updated comment";
-        commentRepositoryJpa.updateById(1L, updatedComment);
-        val comment = testEntityManager.find(Comment.class, 1L);
-        assertThat(comment).isEqualTo(new Comment(1, updatedComment, "Jack Black", 1));
+        assertThat(comment).isPresent().isEqualTo(Optional.of(new Comment(1, "good book", 1)));
     }
 }

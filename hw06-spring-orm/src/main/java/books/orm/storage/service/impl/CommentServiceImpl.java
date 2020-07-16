@@ -1,5 +1,6 @@
 package books.orm.storage.service.impl;
 
+import books.orm.storage.db.repository.BookRepositoryJpa;
 import books.orm.storage.db.repository.CommentRepositoryJpa;
 import books.orm.storage.service.BookFormatterService;
 import books.orm.storage.service.CommentService;
@@ -17,6 +18,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepositoryJpa commentRepositoryJpa;
     private final BookFormatterService bookFormatterService;
+    private final BookRepositoryJpa bookRepositoryJpa;
 
     @Override
     @Transactional(readOnly = true)
@@ -34,8 +36,12 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(readOnly = true)
     public String findCommentsByBookId(long bookId) {
         try {
-            val comments = commentRepositoryJpa.findAllByBookId(bookId);
-            return bookFormatterService.commentsToString(comments);
+            val book = bookRepositoryJpa.findById(bookId);
+            if (book.isPresent()) {
+                val comments = book.get().getComments();
+                return bookFormatterService.commentsToString(comments);
+            }
+            return bookFormatterService.noItemString("book", bookId);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new CommentServiceException(ex);
@@ -46,7 +52,8 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public void deleteComment(long commentId) {
         try {
-            commentRepositoryJpa.deleteById(commentId);
+            val comment = commentRepositoryJpa.findById(commentId);
+            comment.ifPresent(commentRepositoryJpa::delete);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new CommentServiceException(ex);
@@ -57,7 +64,8 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public void updateComment(long id, String comment) {
         try {
-            commentRepositoryJpa.updateById(id, comment);
+            val comm = commentRepositoryJpa.findById(id);
+            comm.ifPresent(c -> c.setComment(comment));
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new CommentServiceException(ex);

@@ -92,23 +92,26 @@ class BookServiceImplTest {
     @Test
     @DisplayName("Shall delete book")
     void deleteBookById() {
-        Mockito.doNothing().when(bookRepositoryJpa).deleteById(1);
+        val book = Book.builder().id(1).title("title").build();
+        Mockito.when(bookRepositoryJpa.findById(1)).thenReturn(Optional.ofNullable(book));
+        Mockito.doNothing().when(bookRepositoryJpa).delete(book);
         bookService.deleteBookById(1);
-        Mockito.verify(bookRepositoryJpa, times(1)).deleteById(1);
+        Mockito.verify(bookRepositoryJpa, times(1)).delete(book);
     }
 
     @Test
     @DisplayName("Shall update a book")
     void updateBookById() {
-        Mockito.doNothing().when(bookRepositoryJpa).updateTitleById(1, "new title");
+        val book = Book.builder().id(1).title("title").build();
+        Mockito.when(bookRepositoryJpa.findById(1L)).thenReturn(Optional.ofNullable(book));
         bookService.updateBookById(1, "new title");
-        Mockito.verify(bookRepositoryJpa, times(1)).updateTitleById(1, "new title");
+        Mockito.verify(bookRepositoryJpa, times(1)).findById(1L);
     }
 
     @Test
     @DisplayName("Shall add new comment")
     void addNewComment() {
-        val comment = new Comment(0, "comment", "author", 1);
+        val comment = new Comment(0, "comment", 1);
         Mockito.when(bookRepositoryJpa.findById(comment.getBookId())).thenReturn(Optional.of(new Book()));
         Mockito.when(commentRepositoryJpa.save(comment)).thenReturn(comment);
         bookService.addComment(comment);
