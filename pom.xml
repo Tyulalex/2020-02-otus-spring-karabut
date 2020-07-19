@@ -14,6 +14,7 @@
         <module>hw03-spring-boot-migration</module>
         <module>hw04-spring-shell</module>
         <module>hw06-spring-orm</module>
+        <module>hw07-spring-data-sql</module>
     </modules>
 
     <properties>
