@@ -1,0 +1,8 @@
+package book.springdata.sql.storage.service.exception;
+
+public class AuthorServiceException extends BookStorageBaseException {
+
+    public AuthorServiceException(Exception ex) {
+        super(ex);
+    }
+}
