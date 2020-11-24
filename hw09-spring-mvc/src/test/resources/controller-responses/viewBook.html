@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td>three pigs</td>
+    </tr>
+    <tr>
+        <td>Authors</td>
+        <td>David Wiesner</td>
+    </tr>
+    <tr>
+        <td>Genres</td>
+        <td>Children&#39;s picture book</td>
+    </tr>
+</table>
+
+
+<div>
+    <a href="/books/edit?id=1">Edit</a>
+    <form action="/books/delete/1" method="post"><input type="hidden" name="_method" value="delete"/>
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit" id="submitButton">Delete</button>
+    </form>
+    <a href="/">Back</a>
+</div>
+
+</body>
+</html>

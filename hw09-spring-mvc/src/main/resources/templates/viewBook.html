@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td th:text="${book.title}"></td>
+    </tr>
+    <tr>
+        <td>Authors</td>
+        <td th:text="${book.authors}"></td>
+    </tr>
+    <tr>
+        <td>Genres</td>
+        <td th:text="${book.genres}"></td>
+    </tr>
+</table>
+
+
+<div>
+    <a th:href="@{/books/edit(id=${book.id})}" href="editBook.html">Edit</a>
+    <form action="#" th:action="@{'/books/delete/{id}'(id=${book.id})}" th:method="delete">
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit" id="submitButton">Delete</button>
+    </form>
+    <a th:href="@{/}" href="bookList.html">Back</a>
+</div>
+
+</body>
+</html>
